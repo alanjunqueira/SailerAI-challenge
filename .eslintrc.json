@@ -1,3 +1,37 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": "next/core-web-vitals",
+  "plugins": ["eslint-plugin-import-helpers"],
+  "rules": {
+    "camelcase": "off",
+    "react/no-unescaped-entities": "off",
+    "prettier/prettier": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@ts-expect-error": "off",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          "/^next/",
+          "/^react/",
+          ["module", "/zod/"],
+          "parent",
+          "sibling",
+          "/^@/components/",
+          "/^@/lib/",
+          "/^@/store/",
+          "/^@/hooks/",
+          "/^@/@types/",
+          "/^@/utils/",
+          "index"
+        ],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/*.spec.js"] }
+    ]
+  }
 }
