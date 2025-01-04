@@ -1,7 +1,7 @@
 "use server";
 
 import { authedProcedure } from "@/app/_shared/procedures/authedProcedure";
-import { Env } from "@/helpers/env";
+import { Env } from "@/helpers/env/env";
 
 import {
   createChatSchema,
@@ -18,6 +18,7 @@ export const createChat = authedProcedure
     return error.flatten().fieldErrors;
   })
   .handler(async ({ input, ctx }) => {
+    console.log([ctx.user.user_id, ...input.participants])
     const result = await fetcher(`${Env.API_BASE_URL}/chats`, {
       method: "POST",
       body: JSON.stringify({
@@ -26,7 +27,7 @@ export const createChat = authedProcedure
     });
 
     if (!result.ok) {
-      throw new Error("Failed to fetch chats");
+      throw new Error("Failed to create a chat");
     }
 
     return await result.json();

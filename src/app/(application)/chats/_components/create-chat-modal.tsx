@@ -9,7 +9,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { useServerAction } from "zsa-react";
 
 import { createChat } from "../_actions/create-chat";
-import { useChatsStore } from "../store/chats.store";
+import { useChatsStore } from "../_store/chats.store";
 
 import { Hint } from "@/components/hint";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +26,7 @@ import { Label } from "@/components/ui/label";
 
 import { cn } from "@/lib/utils";
 
+import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
 
 import { IUser } from "@/@types/user";
@@ -34,6 +35,7 @@ export function CreateChatModal() {
   const { toast } = useToast();
   const [, setChatId] = useQueryState("chatId", { defaultValue: "" });
   const { addChat } = useChatsStore();
+  const { loggedUser } = useAuth();
 
   const {
     execute: executeCreateChat,
@@ -64,7 +66,10 @@ export function CreateChatModal() {
   const { execute: executeSearchUsers, isPending: isSearching } =
     useServerAction(listUsers, {
       onSuccess: ({ data }) => {
-        setSearchResults(data.users);
+        const usersWithoutLoggedUser = data.users.filter(
+          (user: IUser) => user.user_id !== loggedUser?.user_id,
+        );
+        setSearchResults(usersWithoutLoggedUser);
       },
       onError: ({ err }) => {
         console.log(err);

@@ -9,7 +9,7 @@ export default function Error({
   reset,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  reset: VoidFunction;
 }) {
   useEffect(() => {
     console.error(error);

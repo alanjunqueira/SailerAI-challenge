@@ -2,19 +2,6 @@
 
 import { ComponentProps } from "react";
 
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-} from "lucide-react";
-
 import { Chats } from "../chats";
 import { CreateChatModal } from "../create-chat-modal";
 
@@ -32,8 +19,8 @@ import { IChat } from "@/@types/chat";
 import { IUser } from "@/@types/user";
 
 interface IChatsSidebarProps extends ComponentProps<typeof Sidebar> {
-  initialChats: IChat[]
-  user: IUser
+  initialChats: IChat[];
+  user: IUser;
 }
 
 export const ChatsSidebar = ({

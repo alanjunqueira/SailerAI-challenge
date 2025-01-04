@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { createAvatarTag } from "@/helpers/name";
 import { useQueryState } from "nuqs";
 
-import { useChatsStore } from "../store/chats.store";
+import { useChatsStore } from "../_store/chats.store";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { SidebarMenuButton } from "@/components/ui/sidebar";

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const envSchema = z.object({
   API_BASE_URL: z.string().url(),
-  PUBLIC_SOCKET_URL: z.string().url(),
+  NEXT_PUBLIC_SOCKET_URL: z.string().url(),
 });
 
 const _env = envSchema.safeParse(process.env);
@@ -14,3 +14,4 @@ if (_env.success === false) {
 }
 
 export const Env = _env.data;
+
