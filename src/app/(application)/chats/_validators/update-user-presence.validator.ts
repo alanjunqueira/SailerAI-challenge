@@ -6,7 +6,7 @@ export const updateUserPresenceSchema = z.object({
   chatId: z.string()
 });
 export const updateUserPresenceOutputSchema = z.object({
-  status: z.string()
+  status: userPresenceSchema
 });
 
 export type TUpdateUserPresenceOutput = z.output<typeof updateUserPresenceOutputSchema>;

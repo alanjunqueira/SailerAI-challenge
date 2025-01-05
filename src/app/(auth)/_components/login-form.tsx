@@ -33,24 +33,23 @@ export function LoginForm({
   const { execute, error, isPending } = useServerAction(login, {
     onSuccess: ({ data }) => {
       toast({
-        title: "Tudo certo!",
-        description: data.message ?? "Login realizado com sucesso!",
+        title: "Success!",
+        description: data.message ?? "Login realized successful!",
       });
       router.push("/chats");
     },
     onError: ({ err }) => {
       if (err.fieldErrors) {
         toast({
-          title: "Erro de validação",
-          description: "Preencha os campos corretamente.",
+          title: "Validation error",
+          description: "Fill in the fields correctly",
           variant: "destructive",
         });
         return;
       }
       toast({
-        title: "Ocorreu um erro",
-        description:
-          err.message ?? "Não foi possível efetuar o login, tente novamente.",
+        title: "An error occurred",
+        description: err.message ?? "Wasn't possible to login, try again.",
         variant: "destructive",
       });
     },

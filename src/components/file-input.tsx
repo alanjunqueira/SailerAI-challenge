@@ -54,12 +54,10 @@ export const FileInput = ({
 
       setFiles(files);
 
-      // Verificando se o arquivo está disponível antes de tentar ler
       const file = files[0];
       if (file) {
         const imageTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
 
-        // Apenas tenta ler o arquivo se for do tipo de imagem suportado
         if (imageTypes.includes(file.type)) {
           const reader = new FileReader();
           reader.onload = () => {

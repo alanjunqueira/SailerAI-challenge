@@ -44,8 +44,8 @@ export function CreateChatModal() {
   } = useServerAction(createChat, {
     onSuccess: ({ data }) => {
       toast({
-        title: "Chat criado",
-        description: "Chat criado com sucesso!",
+        title: "Chat created",
+        description: "Chat created successfully!",
       });
       setParticipants([]);
       setInputValue("");
@@ -55,9 +55,9 @@ export function CreateChatModal() {
     },
     onError: () => {
       toast({
-        title: "Erro ao criar chat",
+        title: "Error creating chat",
         description:
-          "Ocorreu um erro ao criar o chat. Por favor, tente novamente.",
+          "An error occurred while creating the chat. Please try again.",
         variant: "destructive",
       });
     },
@@ -74,9 +74,9 @@ export function CreateChatModal() {
       onError: ({ err }) => {
         console.log(err);
         toast({
-          title: "Erro ao buscar usuários",
+          title: "Error searching users",
           description:
-            "Ocorreu um erro ao buscar usuários. Por favor, tente novamente.",
+            "An error occurred while searching for users. Please try again..",
           variant: "destructive",
         });
       },
@@ -86,8 +86,6 @@ export function CreateChatModal() {
   const [inputValue, setInputValue] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchResults, setSearchResults] = useState<IUser[]>([]);
-
-  console.log("searchResults", searchResults);
 
   const debouncedSearch = useDebouncedCallback((query: string) => {
     executeSearchUsers({ query });
@@ -114,8 +112,8 @@ export function CreateChatModal() {
 
     if (alreadyAdded) {
       toast({
-        title: "Participante já adicionado",
-        description: "Este participante já foi adicionado.",
+        title: "Participant already added",
+        description: "This participant has already been added.",
         variant: "destructive",
       });
     }
@@ -156,22 +154,23 @@ export function CreateChatModal() {
           className="font-bold"
           onClick={handleOpenModal}
         >
-          <Plus /> Criar novo chat
+          <Plus /> Create a new chat
         </Button>
       </DialogTrigger>
       <DialogContent
         className="sm:max-w-md"
         onInteractOutside={handleCloseModal}
         onEscapeKeyDown={handleCloseModal}
+        closeModalFn={handleCloseModal}
       >
         <DialogHeader>
-          <DialogTitle>Criar novo chat</DialogTitle>
+          <DialogTitle>Create a new chat</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col gap-4">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <Label htmlFor="participants">Participantes</Label>
-              <Hint text="Por padrão, você já é adicionado ao chat.">
+              <Label htmlFor="participants">Participants</Label>
+              <Hint text="By default, you're already added to chat.">
                 <Info className="size-5 text-primary" />
               </Hint>
             </div>
@@ -179,7 +178,7 @@ export function CreateChatModal() {
             <div className="rounded-lg border shadow-md">
               <Input
                 id="participants"
-                placeholder="Pesquisar usuários..."
+                placeholder="Search users..."
                 value={inputValue}
                 onChange={handleInputChange}
               />
@@ -192,7 +191,7 @@ export function CreateChatModal() {
                   {isSearching ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : searchResults.length === 0 ? (
-                    <p>Nenhum usuário encontrado</p>
+                    <p>Any users found</p>
                   ) : null}
                 </div>
                 <div className="flex h-full max-h-48 flex-col gap-2 overflow-y-auto px-4 py-2">
@@ -251,7 +250,7 @@ export function CreateChatModal() {
             disabled={isPending}
             className="mt-4 self-end"
           >
-            Criar Chat
+            Create chat
           </Button>
         </div>
       </DialogContent>

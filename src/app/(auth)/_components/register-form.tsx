@@ -33,8 +33,8 @@ export function RegisterForm({
   const { execute, error, isPending } = useServerAction(register, {
     onSuccess: ({ data }) => {
       toast({
-        title: "Tudo certo!",
-        description: data.message ?? "Cadastro realizado com sucesso!",
+        title: "Success!",
+        description: data.message ?? "Register realized successful!",
       });
 
       router.push("/sign-in");
@@ -42,17 +42,15 @@ export function RegisterForm({
     onError: ({ err }) => {
       if (err.fieldErrors) {
         toast({
-          title: "Erro de validação",
-          description: "Preencha os campos corretamente.",
+          title: "Validation error",
+          description: "Fill in the fields correctly",
           variant: "destructive",
         });
         return;
       }
       toast({
-        title: "Ocorreu um erro",
-        description:
-          err.message ??
-          "Não foi possível efetuar o register, tente novamente.",
+        title: "An error occurred",
+        description: err.message ?? "Wasn't possible to register, try again.",
         variant: "destructive",
       });
     },

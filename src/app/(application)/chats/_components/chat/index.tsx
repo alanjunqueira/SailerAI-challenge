@@ -1,13 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { parseAsString, useQueryState } from "nuqs";
-import { useServerAction } from "zsa-react";
 
-import { getChatMessages } from "../../_actions/get-chat-messages";
 import { useChatStore } from "../../_store/chat.store";
-import { useChatsStore } from "../../_store/chats.store";
 import {
   chatReadSchema,
   eventSchema,
@@ -15,6 +12,7 @@ import {
   presenceUpdatedSchema,
 } from "../../_validators/events";
 
+import { ChatActions } from "./chat-actions";
 import { MessageInput } from "./message-input";
 import { MessageList } from "./message-list";
 import { UserPresence } from "./user-presence";
@@ -97,9 +95,9 @@ export const Chat = () => {
 
   return (
     <div className="flex h-screen flex-1 flex-col">
-      <header className="flex flex-col items-start border-b p-2">
-        <div className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-          <div className="flex items-center gap-2 px-4">
+      <header className="flex w-full flex-col items-start border-b p-2">
+        <div className="flex h-16 w-full shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+          <div className="flex items-center gap-2">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
             <Breadcrumb>
@@ -111,13 +109,16 @@ export const Chat = () => {
                   <>
                     <BreadcrumbSeparator className="hidden md:block" />
                     <BreadcrumbItem>
-                      <BreadcrumbPage>{chatId}</BreadcrumbPage>
+                      <BreadcrumbPage className="line-clamp-1">
+                        {chatId}
+                      </BreadcrumbPage>
                     </BreadcrumbItem>
                   </>
                 )}
               </BreadcrumbList>
             </Breadcrumb>
           </div>
+          <ChatActions />
         </div>
         <Separator className="mb-2" />
         <UserPresence />

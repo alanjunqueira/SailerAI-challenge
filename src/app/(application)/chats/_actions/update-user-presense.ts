@@ -12,7 +12,9 @@ import { fetcher } from "@/lib/fetcher";
 
 export const updateUserPresence = authedProcedure
   .createServerAction()
-  .input(updateUserPresenceSchema)
+  .input(updateUserPresenceSchema, {
+    type: "formData",
+  })
   .output(updateUserPresenceOutputSchema)
   .onInputParseError(async (error) => {
     return error.flatten().fieldErrors;

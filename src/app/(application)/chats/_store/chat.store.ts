@@ -1,7 +1,7 @@
+import { TPresence } from "@/app/_shared/validators/users";
 import { create } from "zustand";
 
 import { IMessage } from "@/@types/message";
-import { TPresence } from "@/app/_shared/validators/users";
 
 interface IChatPresence {
   user_id: string;

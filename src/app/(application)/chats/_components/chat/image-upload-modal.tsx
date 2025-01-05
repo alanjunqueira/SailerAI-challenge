@@ -34,9 +34,9 @@ export function ImageUploadModal() {
   const { execute: executeSendChatMessage } = useServerAction(sendChatMessage, {
     onError: () => {
       toast({
-        title: "Erro ao enviar mensagem",
+        title: "Error sending message",
         description:
-          "Ocorreu um erro ao envia ra mensagem. Por favor, tente novamente.",
+          "An error occurred while sending the message. Please try again.",
         variant: "destructive",
       });
     },
@@ -72,11 +72,11 @@ export function ImageUploadModal() {
 
         setImagePreview(null);
       } catch (error) {
-        console.error("Erro ao enviar imagem:", error);
+        console.error("Error sending image:", error);
         toast({
-          title: "Erro ao enviar imagem",
+          title: "Error sending image",
           description:
-            "Ocorreu um erro ao enviar a imagem. Por favor, tente novamente.",
+            "There was an error uploading the image. Please try again.",
           variant: "destructive",
         });
       }
@@ -87,7 +87,7 @@ export function ImageUploadModal() {
     <Dialog>
       <DialogTrigger asChild>
         <Button size="icon" variant="outline">
-          <LucideImage className="h-4 w-4" />
+          <LucideImage className="size-4" />
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -96,10 +96,10 @@ export function ImageUploadModal() {
         </DialogHeader>
         <div className="flex flex-col">
           <h5 className="text-sm text-muted-foreground">
-            Tamanho: 1920px x 1080px 16:9 700kb
+            Size: 1920px x 1080px 16:9 700kb
           </h5>
           <h5 className="text-sm text-muted-foreground">
-            Arquivo: JPG, JPEG ou PNG
+            File: JPG, JPEG ou PNG
           </h5>
 
           <div className="mt-7">
@@ -125,7 +125,11 @@ export function ImageUploadModal() {
             />
           </div>
 
-          <Button className="mt-4 self-end" onClick={handleUpload} disabled={!files[0]}>
+          <Button
+            className="mt-4 self-end"
+            onClick={handleUpload}
+            disabled={!files[0]}
+          >
             Send Image
           </Button>
         </div>

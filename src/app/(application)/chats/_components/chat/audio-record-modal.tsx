@@ -34,9 +34,9 @@ export function AudioRecordModal() {
   const { execute: executeSendChatMessage } = useServerAction(sendChatMessage, {
     onError: () => {
       toast({
-        title: "Erro ao enviar mensagem",
+        title: "Error sending message",
         description:
-          "Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente.",
+          "An error occurred while sending the message. Please try again.",
         variant: "destructive",
       });
     },
@@ -117,7 +117,7 @@ export function AudioRecordModal() {
     <Dialog>
       <DialogTrigger asChild>
         <Button size="icon" variant="outline">
-          <Mic className="h-4 w-4" />
+          <Mic className="size-4" />
         </Button>
       </DialogTrigger>
       <DialogContent>

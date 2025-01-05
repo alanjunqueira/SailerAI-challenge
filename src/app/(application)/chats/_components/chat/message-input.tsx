@@ -29,9 +29,9 @@ export function MessageInput() {
   const { execute: executeSendChatMessage } = useServerAction(sendChatMessage, {
     onError: () => {
       toast({
-        title: "Erro ao enviar mensagem",
+        title: "Error sending message",
         description:
-          "Ocorreu um erro ao envia ra mensagem. Por favor, tente novamente.",
+          "An error occurred while sending the message. Please try again.",
         variant: "destructive",
       });
     },
@@ -42,9 +42,9 @@ export function MessageInput() {
     {
       onError: () => {
         toast({
-          title: "Erro ao enviar mensagem",
+          title: "Error updating user presence",
           description:
-            "Ocorreu um erro ao envia ra mensagem. Por favor, tente novamente.",
+            "An error occurred while updating user presence. Please try again.",
           variant: "destructive",
         });
       },
@@ -57,10 +57,12 @@ export function MessageInput() {
       setMessage("");
 
       if (loggedUser) {
-        executeUpdateUserPresence({
-          status: EPresence.Online,
-          chatId,
-        });
+        const formData = new FormData();
+        formData.append("chatId", chatId);
+        formData.append("status", EPresence.Online);
+
+
+        executeUpdateUserPresence(formData);
       }
     }
   };
@@ -68,10 +70,10 @@ export function MessageInput() {
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const message = e.target.value;
     if (loggedUser && chatId) {
-      executeUpdateUserPresence({
-        status: message ? EPresence.Typing : EPresence.Online,
-        chatId,
-      });
+      const formData = new FormData();
+      formData.append("chatId", chatId);
+      formData.append("status", message ? EPresence.Typing : EPresence.Online);
+      executeUpdateUserPresence(formData);
     }
     setMessage(message);
   };
@@ -86,8 +88,8 @@ export function MessageInput() {
       />
       <ImageUploadModal />
       <AudioRecordModal />
-      <Button size="icon" onClick={handleSendMessage}>
-        <Send className="h-4 w-4" />
+      <Button size="icon" onClick={handleSendMessage} disabled={!message.trim()}>
+        <Send className="size-4" />
       </Button>
     </div>
   );
