@@ -33,7 +33,11 @@ export const currentUser = async (): Promise<TCurrentUserData | null> => {
     let exists = false;
     const user = await userSchema.parseAsync(JSON.parse(userCookie));
 
-    const result = await fetcher(`${Env.API_BASE_URL}/users/${user.user_id}`);
+    const result = await fetcher(`${Env.API_BASE_URL}/users/${user.user_id}`, {
+      next: {
+        revalidate: 60,
+      }
+    });
 
     if (result.ok) {
       exists = true;
